@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 // execution of main function
-main().then(()=>{console.log("connected");
+main().then(() => {
+  console.log("connected");
 })
 .catch(err => console.log(err));
 
@@ -12,13 +13,13 @@ async function main() {
 
 // creating schema for user collection
 const userSchema = new mongoose.Schema({
-  name:String,
-  email:String,
-  age : Number
+  name: String,
+  email: String,
+  age: Number
 });
 
 // adding schema to our user collection
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User", userSchema);
 
 // adding single doc to user collection
 // const user2 = User({
@@ -35,10 +36,24 @@ const User = mongoose.model("User",userSchema);
 
 
 // adding more than one doc to user collection
-User.insertMany([
-  {name:"mehdi",email:"mehdi@gmail.com",age:21},
-  {name:"hasso",email:"hasso@gmail.com",age:28},
-]).then(data=>{
-  console.log(data);
-  
+// User.insertMany([
+//   {name:"mehdi",email:"mehdi@gmail.com",age:21},
+//   {name:"hasso",email:"hasso@gmail.com",age:28},
+// ]).then(data=>{
+//   console.log(data);
+
+// })
+
+
+// User.findById("672b5fef9c69b2fc48292a7b").then(res=>{console.log(res);
+// })
+// .catch(err=>{console.log(err);
+// })
+
+
+User.updateMany({ age: { $gt: 27 } }, { age: 50 }).then(res => {
+  console.log(res);
 })
+  .catch(err => {
+    console.log(err);
+  })
